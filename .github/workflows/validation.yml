@@ -1,0 +1,44 @@
+name: Code Validation
+on: 
+    pull_request:
+        branches:
+            - main
+            - publish
+        paths:
+            - 'components/**'
+    
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 20
+            - name : Install pnpm
+              uses: pnpm/action-setup@v2
+              with:
+                  version: 9.6.0
+                  run_install: false
+            - name: Get pnpm store directory
+              id: pnpm-cache
+              shell: bash
+              run: |
+                  echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+                  echo "STORE_URL=$(pnpm store path --json)" >> $GITHUB_OUTPUT
+                  echo "STORE_STATUS=$(pnpm store status --json)" >> $GITHUB_OUTPUT
+            - uses: actions/cache@v3
+              name: Setup pnpm cache
+              with:
+                  path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
+        
+            - name: Install dependencies
+              run: pnpm install --no-frozen-lockfile
+            - name: Run Lint
+              run: pnpm lint
+            - name: Run Build
+              run: pnpm build
