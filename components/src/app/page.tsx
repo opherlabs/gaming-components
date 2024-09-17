@@ -1,4 +1,4 @@
-import { ExampleComponent } from "@/components";
+import { ExampleComponent, QuizComponent } from "@/components";
 
 
 export default function Home() {
@@ -18,6 +18,7 @@ export default function Home() {
         <ExampleComponent key={i} bg={bg} title={title} />
       ))
      }
+     <QuizComponent files={[]}/>
     </div>
   );
 }
