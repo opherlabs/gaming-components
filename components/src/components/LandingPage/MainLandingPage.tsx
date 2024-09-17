@@ -1,7 +1,4 @@
 "use client";
-
-import { useState } from "react";
-
 import Image from "next/image";
 import Link from "next/link";
 import { ImageGallery, LandingPageImages, smallImages } from ".";
@@ -10,7 +7,7 @@ import React from "react";
 
 
 
-export const MainLandingPage = ({ session }: { session: any }) => {
+export const MainLandingPage = ({ session }: { session: unknown }) => {
  
 
   const handleAuth = () => {

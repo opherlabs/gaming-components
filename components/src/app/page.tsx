@@ -1,5 +1,5 @@
 import React from "react";
-import {MainLandingPage}  from '@/components/'
+import {MainLandingPage}  from '../components/'
 
 
 
@@ -8,7 +8,7 @@ import {MainLandingPage}  from '@/components/'
 export default function Home() {
   return (
     <div className="">
-    <MainLandingPage />
+    <MainLandingPage session={undefined} />
     
      
 
