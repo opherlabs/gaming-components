@@ -97,7 +97,7 @@ jobs:
       
             - name: Publish to npm
               working-directory: ./components
-              run: npm publish --no-git-checks --publish-branch publish
+              run: npm publish --no-git-checks 
               env:
                 NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       
@@ -144,7 +144,7 @@ jobs:
               run: npm run build
             - name: Publish to GitHub Packages
               
-              run: npm publish --publish-branch publish --no-git-checks --registry https://npm.pkg.github.com
+              run: npm publish --no-git-checks --registry https://npm.pkg.github.com
               env:
                 NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
   create-new-release:
