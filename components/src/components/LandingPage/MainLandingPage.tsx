@@ -6,11 +6,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { ImageGallery, LandingPageImages, smallImages } from ".";
 import { SmallRoundedImageGallery } from "./SmallRoundedImageGallery ";
+import React from "react";
 
 
 
 export const MainLandingPage = ({ session }: { session: any }) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+ 
 
   const handleAuth = () => {
     if (session) {
@@ -19,21 +20,7 @@ export const MainLandingPage = ({ session }: { session: any }) => {
     return "";
   };
 
-  const greeting = () => {
-    const time = new Date().getHours();
-    let greet = "";
-    if (time < 12) {
-      greet = "Good Morning";
-    } else if (time >= 12 && time < 17) {
-      greet = "Good Afternoon";
-    } else {
-      greet = "Good Evening";
-    }
-    if (session?.data) {
-      return `${greet} ${session?.data.user?.name}`;
-    }
-    return `${greet}, Welcome`;
-  };
+
 
   return (
     <div className="bg-gray-900 min-h-screen max-h-screen overflow-hidden">

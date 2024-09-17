@@ -1,5 +1,6 @@
 
 import { ExampleComponent } from "@/components";
+import React from "react";
 
 
 export default function Home() {
