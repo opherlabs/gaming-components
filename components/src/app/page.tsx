@@ -5,8 +5,5 @@ export default function Home() {
     <div className="">
     <MainLandingPage session={undefined} />
     </div>
-
-    
-
   );
 }
