@@ -1,4 +1,5 @@
-import { files, QuizCards } from "@/components";
+import React from "react";
+import { files, QuizCards } from "../../components";
 
 function CardsComponent() {
     return (
