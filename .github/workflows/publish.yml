@@ -114,7 +114,7 @@ jobs:
               with:
                 node-version: '20'
                 registry-url: 'https://npm.pkg.github.com'
-                scope: '@itthynk'
+                scope: '@opherlabs'
       
             - name: Setup pnpm
               uses: pnpm/action-setup@v4.0.0
@@ -142,7 +142,8 @@ jobs:
               run: pnpm comp build
       
             - name: Publish to GitHub Packages
-              run: pnpm publish --no-git-checks
+              working-directory: ./components
+              run: pnpm pub --no-git-checks
               env:
                 NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
   create-new-release:
