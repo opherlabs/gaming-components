@@ -3,14 +3,29 @@
   "version": "0.0.0",
   "private": false,
   "license": "MIT",
-  "author": "Itthynk",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "description": "A collection of reusable NextJs Optimized components for building scalable user interfaces.",
+  "author": "Itthynk Opherlabs Team",
+  "module": "dist/components/index.js",
+  "types": "dist/components/index.d.ts",
   "files": [
     "dist",
     "package.json",
     "README.md"
   ],
+  "bugs": {
+    "url": "https://github.com/opherlabs/gaming-components/issues"
+  },
+  "tags": [
+    "nextjs",
+    "components",
+    "gaming",
+    "itthynk",
+    "opherlabs",
+    "react",
+    "typescript"
+  ],
+  "contributors": [],
+  "homepage": "https://github.com/opherlabs/gaming-components",
   "repository": {
     "type": "git",
     "url": "https://github.com/opherlabs/gaming-components.git"
