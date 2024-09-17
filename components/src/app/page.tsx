@@ -3,7 +3,7 @@ import {MainLandingPage}  from '../components/'
 export default function Home() {
   return (
     <div className="">
-    <MainLandingPage session={undefined} />
+    <MainLandingPage session={null} />
     </div>
   );
 }
