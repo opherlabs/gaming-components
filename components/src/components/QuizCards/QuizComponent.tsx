@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { useParams, useRouter } from "next/navigation";
 import React, { useState, useRef, useEffect } from "react";
@@ -10,6 +9,7 @@ type Question = {
   question: string;
   options: string[];
   correctAnswer: string;
+  timer: number; // Timer property added
 };
 
 type FileItem = {
@@ -54,8 +54,10 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
   }, [timeLeft]);
 
   useEffect(() => {
-    setTimeLeft(30);
-  }, [currentQuestionIndex]);
+    if (file && file.questions[currentQuestionIndex]) {
+      setTimeLeft(file.questions[currentQuestionIndex].timer); 
+    }
+  }, [currentQuestionIndex, file]);
 
   if (!file) return <p>File not found</p>;
 
@@ -162,12 +164,14 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
           </div>
         </div>
       </div>
-      <ScoreModal
-        score={score}
-        totalQuestions={file.questions.length}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-      />
+      {isModalOpen && (
+       <ScoreModal
+       score={score}
+       totalQuestions={file.questions.length}
+       isOpen={isModalOpen}
+       onClose={handleCloseModal}
+     />
+      )}
     </div>
   );
 };
