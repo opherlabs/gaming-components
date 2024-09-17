@@ -1,6 +1,7 @@
 import React from 'react';
 
 export const ExampleComponent = () => {
+  // sample diversity component
   return (
     <div>
       <div className="w-64 h-96 rounded-lg overflow-hidden bg-[#1a2a5e] flex flex-col" style={{backgroundColor: '#1a2a5e'}}>
