@@ -1,6 +1,6 @@
 {
   "name": "@itthynk/components",
-  "version": "0.0.0",
+  "version": null,
   "private": false,
   "license": "MIT",
   "author": "Itthynk",
@@ -20,7 +20,12 @@
     "build": "rollup -c --bundleConfigAsCjs",
     "start": "next start",
     "lint": "next lint",
-    "pub":"pnpm publish --access public"
+    "pub": "pnpm publish --access public",
+    "release": "standard-version --sign --tag-prefix 'itthynk-components@' ",
+    "rel:minor": "pnpm release  --release-as minor",
+    "rel:patch": "pnpm release  --release-as patch",
+    "rel:major": "pnpm release  --release-as major",
+    "rel:initial": "pnpm release  --release-as initial"
   },
   "dependencies": {
     "next": "14.2.11",
