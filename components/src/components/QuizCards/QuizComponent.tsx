@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { useParams, useRouter } from "next/navigation";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import ScoreModal from './ScoreModal';
 
@@ -31,58 +31,46 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [showAnswer, setShowAnswer] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(5);
   const [score, setScore] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(30); 
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (timeLeft === 0) {
+      moveToNextQuestion();
+      return;
+    }
+    
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prevTime) => prevTime - 1);
+    }, 1000);
+
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [timeLeft]);
+
+  useEffect(() => {
+    setTimeLeft(30);
+  }, [currentQuestionIndex]);
 
   if (!file) return <p>File not found</p>;
 
   const currentQuestion = file.questions[currentQuestionIndex];
 
-  const useTimer = (initialTime: number, onTimerEnd: () => void) => {
-    const [time, setTime] = useState(initialTime);
-
-    const startTimer = () => {
-      timerRef.current = setInterval(() => {
-        setTime((prevTime) => {
-          if (prevTime <= 1) {
-            clearInterval(timerRef.current!);
-            onTimerEnd();
-            return 0;
-          }
-          return prevTime - 1;
-        });
-      }, 1000);
-    };
-
-    const stopTimer = () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-
-    React.useLayoutEffect(() => {
-      startTimer();
-      return () => stopTimer();
-    }, []);
-
-    return time;
-  };
-
   const moveToNextQuestion = () => {
-    if (timerRef.current) clearTimeout(timerRef.current);
     setShowAnswer(false);
     setSelectedOption(null);
-    setTimeLeft(5);
 
     if (currentQuestionIndex < file.questions.length - 1) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     } else {
       setIsModalOpen(true);
     }
+    if (timerRef.current) clearInterval(timerRef.current);
   };
-
-  const timeRemaining = useTimer(timeLeft, moveToNextQuestion);
 
   const handleAnswerCheck = (option: string) => {
     setSelectedOption(option);
@@ -91,8 +79,7 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
       setScore((prevScore) => prevScore + 1);
     }
 
-    if (timerRef.current) clearTimeout(timerRef.current);
-
+    if (timerRef.current) clearInterval(timerRef.current);
     setTimeout(() => {
       moveToNextQuestion();
     }, 3000);
@@ -152,7 +139,7 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
               </div>
             </div>
             <p className={`text-center text-lg mt-6`} style={{ backgroundColor: file.bgColor }}>
-              <span className="font-bold">{timeRemaining}s</span>
+              <span className="font-bold">{timeLeft}s</span>
             </p>
           </div>
         </div>
