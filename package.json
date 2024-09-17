@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "web": "pnpm --filter @itthynk/components "
+    "comp": "pnpm --filter @itthynk/components "
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "standard-version": "^9.5.0"
+  }
 }

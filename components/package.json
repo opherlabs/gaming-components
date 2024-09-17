@@ -1,6 +1,6 @@
 {
   "name": "@itthynk/components",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "private": false,
   "license": "MIT",
   "author": "Itthynk",
@@ -25,7 +25,7 @@
     "rel:minor": "pnpm release  --release-as minor",
     "rel:patch": "pnpm release  --release-as patch",
     "rel:major": "pnpm release  --release-as major",
-    "rel:initial": "pnpm release  --initial-release"
+    "rel:initial": "pnpm release  --first-release"
   },
   "dependencies": {
     "next": "14.2.11",
