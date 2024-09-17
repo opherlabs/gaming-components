@@ -54,7 +54,7 @@ jobs:
          SHA=$(git rev-parse --short HEAD)
          echo "release_sha=${SHA}" >> $GITHUB_OUTPUT
       
-  publish:
+  publish-npm:
         runs-on: ubuntu-latest
         needs: release-version
         environment: publish
@@ -100,12 +100,59 @@ jobs:
               run: pnpm pub
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  publish-github:
+    runs-on: ubuntu-latest
+    needs: release-version
+    environment: publish
+    if: needs.release-version.outputs.release_version != ''
+    name: Publish Components
+    defaults:
+        run:
+            working-directory: ./components
+    steps:
+        - uses: actions/checkout@v4.1.7
+        - name: Setup Node.js
+          uses: actions/setup-node@v4.0.3
+          with:
+              node-version: 20
+              registry-url: 'https://npm.pkg.github.com'
+        - name : Install pnpm
+          uses: pnpm/action-setup@v4.0.0
+          with:
+              version: 9.6.0
+              run_install: false
+       
+        - name: Get pnpm store directory
+          id: pnpm-cache
+          shell: bash
+          run: |
+            echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+        - uses: actions/cache@v4.0.2
+          name: Setup pnpm cache
+          with:
+              path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+              key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+              restore-keys: |
+                  ${{ runner.os }}-pnpm-store-
+    
+        - name: Install dependencies
+          run: pnpm install --no-frozen-lockfile
+        - name: Run Lint
+          run: pnpm lint
+        - name: Run Build
+          run: pnpm build
+        - name: Publish Components
+          working-directory: ./components
+          run: pnpm pub
+          env:
+              NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   
   create-new-release:
     name: Create New Release 🎉
     runs-on: ubuntu-latest
     environment: publish
-    needs: [release-version,publish]
+    needs: [release-version,publish-npm, publish-github]
     if: needs.release-version.outputs.release_version != ''
     permissions:
       contents: write
