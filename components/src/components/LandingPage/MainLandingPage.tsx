@@ -13,7 +13,7 @@ interface SessionData {
     
   }
 
-export const MainLandingPage = ({ session }: { session: SessionData }) => {
+export const MainLandingPage = ({ session }: { session: unknown| null | undefined }) => {
  
 
   const handleAuth = () => {
