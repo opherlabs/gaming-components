@@ -96,8 +96,8 @@ jobs:
             - name: Run Build
               run: pnpm build
             - name: Publish Components
-
-              run: pnpm publish --access public
+              working-directory: ./components
+              run: pnpm pub
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
                   
