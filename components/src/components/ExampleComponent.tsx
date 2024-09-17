@@ -4,7 +4,7 @@ import React from 'react';
 export const ExampleComponent = () => {
   return (
     <div>
-        <div className="w-64 h-96 rounded-lg overflow-hidden bg-[#1a2a5e] flex flex-col" style={{backgroundColor: '#1a2a5e'}}>
+      <div className="w-64 h-96 rounded-lg overflow-hidden bg-[#1a2a5e] flex flex-col" style={{backgroundColor: '#1a2a5e'}}>
       <div className="flex-grow flex items-center justify-center relative" style={{backgroundColor: '#1a2a5e'}}>
         <div className="w-20 h-20 bg-[#1a2a5e] rounded-full flex items-center justify-center z-10" style={{backgroundColor: '#1a2a5e'}}>
           <div className="w-16 h-16 bg-[#243975] rounded-full flex items-center justify-center" style={{backgroundColor: '#243975'}}>
