@@ -9,12 +9,12 @@ export default {
   input: 'src/components/index.ts',
   output: [
     {
-      file: 'dist/components/index.js',
+      file: 'dist/index.js',
       format: 'cjs',
       sourcemap: true,
     },
     {
-      file: 'dist/components/index.esm.js',
+      file: 'dist/index.esm.js',
       format: 'esm',
       sourcemap: true,
     },
