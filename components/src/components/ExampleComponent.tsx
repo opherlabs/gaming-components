@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-export const ExampleComponent = () => {
+export const ExampleComponent:FC<{bg:string, title:string}> = ({bg, title}) => {
+  // sample diversity component
+  const bgColor = `bg-[${bg}]`
   return (
     <div>
       <div className="w-64 h-96 rounded-lg overflow-hidden bg-[#1a2a5e] flex flex-col" style={{backgroundColor: '#1a2a5e'}}>
@@ -19,12 +21,12 @@ export const ExampleComponent = () => {
         {[...Array(12)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-2 h-2 bg-[#243975] rounded-full opacity-40"
+            className={`absolute w-2 h-2 ${bgColor} rounded-full opacity-40`}
             style={{
               top: '50%',
               left: '50%',
               transform: `rotate(${i * 30}deg) translateY(-42px) rotate(-${i * 30}deg)`,
-              backgroundColor: '#243975',
+              backgroundColor: `${bg}`,
               opacity: 0.4
             }}
           ></div>
@@ -32,7 +34,7 @@ export const ExampleComponent = () => {
       </div>
       <div className="h-24 bg-[#15234f] flex items-center justify-center" style={{backgroundColor: '#15234f'}}>
         <p className="text-white font-bold text-center text-lg leading-tight" style={{color: 'white'}}>
-          DIVERSITY<br />QUESTIONS
+          {title}
         </p>
       </div>
     </div>
