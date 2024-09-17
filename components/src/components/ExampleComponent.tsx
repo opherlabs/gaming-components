@@ -1,4 +1,3 @@
-import * as pkg from '../../package.json';
 import React from 'react';
 
 export const ExampleComponent = () => {
