@@ -92,7 +92,7 @@ jobs:
               run: pnpm install
       
             - name: Build
-              run: pnpm run build
+              run: pnpm comp build
       
             - name: Publish to npm
               working-directory: ./components
@@ -139,7 +139,7 @@ jobs:
               run: pnpm install
       
             - name: Build
-              run: pnpm run build
+              run: pnpm comp build
       
             - name: Publish to GitHub Packages
               run: pnpm publish --no-git-checks
