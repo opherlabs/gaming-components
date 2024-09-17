@@ -1,6 +1,6 @@
 {
   "name": "@itthynk/components",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "license": "MIT",
   "description": "A collection of reusable NextJs Optimized components for building scalable user interfaces.",
