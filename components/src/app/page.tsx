@@ -13,7 +13,8 @@ export default function Home() {
         bg: '#1de9b6',
         title: 'UNITY CARDS'
       },
-      {bg: '#29b6f6', title: 'CHALENGE CARDS'}].map(({bg, title}, i) => (
+      {bg: '#29b6f6', title: 'CHALENGE CARDS'}
+    ].map(({bg, title}, i) => (
         <ExampleComponent key={i} bg={bg} title={title} />
       ))
      }

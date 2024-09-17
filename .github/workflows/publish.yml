@@ -151,7 +151,7 @@ jobs:
     name: Create New Release 🎉
     runs-on: ubuntu-latest
     environment: publish
-    needs: [release-version,publish-npm, publish-github]
+    needs: [release-version,publish-npm]
     if: needs.release-version.outputs.release_version != ''
     permissions:
       contents: write
