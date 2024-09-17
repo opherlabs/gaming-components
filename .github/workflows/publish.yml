@@ -143,7 +143,7 @@ jobs:
       
             - name: Publish to GitHub Packages
               working-directory: ./components
-              run: pnpm pub --no-git-checks
+              run: pnpm pub --no-git-checks --registry https://npm.pkg.github.com
               env:
                 NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
   create-new-release:
