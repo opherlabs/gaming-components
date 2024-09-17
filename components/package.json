@@ -73,6 +73,7 @@
   },
   "publishConfig": {
     "access": "public",
+    "publish-branch":"publish",
     "registry": "https://registry.npmjs.org/"
   }
 }
