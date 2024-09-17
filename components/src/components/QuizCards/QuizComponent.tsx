@@ -9,7 +9,7 @@ type Question = {
   question: string;
   options: string[];
   correctAnswer: string;
-  timer: number; // Timer property added
+  timer: number; 
 };
 
 type FileItem = {
