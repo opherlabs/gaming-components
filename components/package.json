@@ -1,6 +1,6 @@
 {
   "name": "@itthynk/components",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "license": "MIT",
   "description": "A collection of reusable NextJs Optimized components for building scalable user interfaces.",
@@ -73,7 +73,7 @@
   },
   "publishConfig": {
     "access": "public",
-    "publish-branch":"publish",
+    "publish-branch": "publish",
     "registry": "https://registry.npmjs.org/"
   }
 }
