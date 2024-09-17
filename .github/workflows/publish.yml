@@ -1,0 +1,140 @@
+name: Publish Itthynk Components
+on:
+    push:
+        tags:
+            - itthynk-components@*.*.*
+    pull_request:
+        types: [closed]
+        
+        branches:
+            - publish
+        paths:
+            - 'components/**'
+permissions:
+    contents: write
+    packages: write
+    pull-requests: write
+    id-token: write
+
+jobs:
+  release-version:
+    name: Release Version
+    runs-on: ubuntu-latest
+    environment: publish
+    env:
+      RELEASE_NAME: components
+      RELEASE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
+      GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
+      GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+      GLOBAL_GPG_SECRET: ${{ secrets.GLOBAL_GPG_SECRET }}
+      GLOBAL_GPG_PASSPHRASE: ${{ secrets.GLOBAL_GPG_PASSPHRASE }}
+    if: github.event_name == 'pull_request' && github.event.pull_request.merged==true
+    outputs:
+      release_version: ${{ steps.release_trigger.outputs.release_version }}
+      pr_log: ${{ steps.release_trigger.outputs.pr_log }}
+      release_sha: ${{ steps.release_trigger_sha.outputs.release_sha }}
+    steps:
+      - uses: actions/checkout@v4.1.7
+      - name: setup node
+        id: release_trigger
+        uses: mitch1009/release-trigger@v1.0.7
+        with:
+          git_user_email: ${{env.GIT_USER_EMAIL}} 
+          git_username: ${{env.GIT_USERNAME }}   
+          gpg_private_key: ${{env.GLOBAL_GPG_SECRET}}  
+          gpg_passphrase: ${{env.GLOBAL_GPG_PASSPHRASE}}
+          git_token: ${{env.GIT_TOKEN}}
+          bump_script: "comp rel:patch"
+          release_branch: "publish"
+          version_file_path: "components/package.json"
+      - name: Release Trigger
+        id: release_trigger_sha
+        run: |
+         SHA=$(git rev-parse --short HEAD)
+         echo "release_sha=${SHA}" >> $GITHUB_OUTPUT
+      
+  publish:
+        runs-on: ubuntu-latest
+        needs: release-version
+        environment: publish
+        if: needs.release-version.outputs.release_version != ''
+        name: Publish Components
+        defaults:
+            run:
+                working-directory: ./components
+        steps:
+            - uses: actions/checkout@v4.1.7
+            - name: Setup Node.js
+              uses: actions/setup-node@v4.0.3
+              with:
+                  node-version: 20
+            - name : Install pnpm
+              uses: pnpm/action-setup@v4.0.0
+              with:
+                  version: 9.6.0
+                  run_install: false
+           
+            - name: Get pnpm store directory
+              id: pnpm-cache
+              shell: bash
+              run: |
+                echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+            - uses: actions/cache@v4.0.2
+              name: Setup pnpm cache
+              with:
+                  path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
+        
+            - name: Install dependencies
+              run: pnpm install --no-frozen-lockfile
+            - name: Run Lint
+              run: pnpm lint
+            - name: Run Build
+              run: pnpm build
+            - name: Publish Components
+
+              run: pnpm publish --access public
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  
+  create-new-release:
+    name: Create New Release 🎉
+    runs-on: ubuntu-latest
+    environment: publish
+    needs: [release-version,publish]
+    if: needs.release-version.outputs.release_version != ''
+    permissions:
+      contents: write
+      id-token: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.7
+        with:
+          fetch-depth: 0  # Fetch all history for all tags and branches
+
+      - name: Get contributors
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+        run: |
+          CONTRIBUTORS=$(gh api repos/${{ github.repository }}/contributors --jq 'map(.login) | join(", @")')
+          echo "CONTRIBUTORS=@$CONTRIBUTORS" >> $GITHUB_ENV
+
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+        run: |
+          gh release create itthynk-components@${{ needs.release-version.outputs.release_version }} \
+            --title "itthynk-components@${{ needs.release-version.outputs.release_version }}" \
+            --notes "## 🎍 What's new in this release:
+            ${{ needs.release-version.outputs.pr_log }}
+            ## 🙏🏾 Thank You:
+            A big thank you to all our amazing engineers and maintainers
+            "
+           
+    
