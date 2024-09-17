@@ -44,7 +44,7 @@ export const MainLandingPage = ({ session }: { session: any }) => {
             }}
           />
         </div>
-        <div className="mx-auto max-w-7xl py-32 sm:py-48 lg:py-72">
+        <div className="mx-auto max-w-6xl py-32 sm:py-48 mr-20 lg:py-72">
           <div className="text-center text-white space-y-6 px-4">
             <div className="flex  justify-center items-center gap-3 ">
                 <div className="flex-1" >  <ImageGallery images={LandingPageImages} /></div>
@@ -55,7 +55,7 @@ export const MainLandingPage = ({ session }: { session: any }) => {
             <div className="flex justify-center items-center">
               <Link
                 className="text-2xl w-1/2 rounded-full font-semibold flex items-center gap-2 justify-center leading-8 text-[#163a59] border-4 border-[#163a59] bg-white px-4 py-2 my-12 shadow-2xl hover:shadow-xl transition-shadow duration-300 ease-in-out"
-                href={session?.data ? "/onboarding" : "/dashboard"}
+                href={session?.data ? "/onboarding" : "/home"}
                 onClick={handleAuth}
               >
                 {session?.data ? (
