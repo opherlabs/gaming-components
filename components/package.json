@@ -8,7 +8,8 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist/.",
+    "dist/*",
+    "dist/**/*",
     "package.json",
     "README.md"
   ],
@@ -73,7 +74,6 @@
   },
   "publishConfig": {
     "access": "public",
-    "publish-branch": "publish",
-    "registry": "https://registry.npmjs.org/"
+    "publish-branch": "publish"
   }
 }
