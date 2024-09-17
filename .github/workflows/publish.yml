@@ -92,11 +92,12 @@ jobs:
               run: pnpm install
       
             - name: Build
-              run: pnpm comp build
+              working-directory: ./components
+              run: npm run build
       
             - name: Publish to npm
               working-directory: ./components
-              run: pnpm pub --no-git-checks
+              run: npm publish --no-git-checks --publish-branch publish
               env:
                 NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       
@@ -139,11 +140,11 @@ jobs:
               run: pnpm install
       
             - name: Build
-              run: pnpm comp build
-      
-            - name: Publish to GitHub Packages
               working-directory: ./components
-              run: pnpm pub --no-git-checks --registry https://npm.pkg.github.com
+              run: npm run build
+            - name: Publish to GitHub Packages
+              
+              run: npm publish --publish-branch publish --no-git-checks --registry https://npm.pkg.github.com
               env:
                 NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
   create-new-release:
