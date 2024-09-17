@@ -6,7 +6,6 @@ import { SmallRoundedImageGallery } from "./SmallRoundedImageGallery ";
 import React from "react";
 
 export const MainLandingPage = ({ session }: { session: unknown| null | undefined }) => {
- 
 
   const handleAuth = () => {
     if (session) {
