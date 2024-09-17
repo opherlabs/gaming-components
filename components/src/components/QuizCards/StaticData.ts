@@ -1,4 +1,3 @@
-// StaticData.ts
 export const files = [
     {
       id: "1",

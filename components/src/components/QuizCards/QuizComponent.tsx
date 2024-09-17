@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { useParams, useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { FaTimes } from "react-icons/fa"; // Importing the XMark icon from react-icons
+import React, { useState, useRef } from "react";
+import { FaTimes } from "react-icons/fa";
+import ScoreModal from './ScoreModal';
 
 type Question = {
   question: string;
@@ -29,28 +31,76 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(5);
+  const [score, setScore] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   if (!file) return <p>File not found</p>;
 
   const currentQuestion = file.questions[currentQuestionIndex];
 
+  const useTimer = (initialTime: number, onTimerEnd: () => void) => {
+    const [time, setTime] = useState(initialTime);
+
+    const startTimer = () => {
+      timerRef.current = setInterval(() => {
+        setTime((prevTime) => {
+          if (prevTime <= 1) {
+            clearInterval(timerRef.current!);
+            onTimerEnd();
+            return 0;
+          }
+          return prevTime - 1;
+        });
+      }, 1000);
+    };
+
+    const stopTimer = () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+
+    React.useLayoutEffect(() => {
+      startTimer();
+      return () => stopTimer();
+    }, []);
+
+    return time;
+  };
+
+  const moveToNextQuestion = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    setShowAnswer(false);
+    setSelectedOption(null);
+    setTimeLeft(5);
+
+    if (currentQuestionIndex < file.questions.length - 1) {
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    } else {
+      setIsModalOpen(true);
+    }
+  };
+
+  const timeRemaining = useTimer(timeLeft, moveToNextQuestion);
+
   const handleAnswerCheck = (option: string) => {
     setSelectedOption(option);
     setShowAnswer(true);
-
-    if (currentQuestionIndex < file.questions.length - 1) {
-      setTimeout(() => {
-        setShowAnswer(false);
-        setSelectedOption(null);
-        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      }, 1000);
-    } else {
-      setTimeout(() => {
-        setShowAnswer(false);
-        setSelectedOption(null);
-        router.push('/cards');
-      }, 1000);
+    if (option === currentQuestion?.correctAnswer) {
+      setScore((prevScore) => prevScore + 1);
     }
+
+    if (timerRef.current) clearTimeout(timerRef.current);
+
+    setTimeout(() => {
+      moveToNextQuestion();
+    }, 3000);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    router.push('/cards');
   };
 
   return (
@@ -59,9 +109,8 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
         className="bg-cover bg-center rounded-lg h-full relative"
         style={{ backgroundImage: `url(${file.source})` }}
       >
-        {/* XMark Icon */}
         <button
-          className="absolute top-4 left-4 text-white text-3xl"
+          className="absolute top-4 right-4 bg-red-500 p-2 rounded-full text-white text-3xl"
           onClick={() => router.push("/cards")}
         >
           <FaTimes />
@@ -74,11 +123,11 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
                 {file.title} Questions
               </h2>
               <p className="text-center text-white">
-                {currentQuestion.question}
+                {currentQuestion?.question ?? 'Loading question...'}
               </p>
             </div>
             <div className="bg-white p-6 rounded-b-lg space-y-4">
-              {currentQuestion.options.map((option, index) => (
+              {currentQuestion?.options.map((option, index) => (
                 <button
                   key={index}
                   className="w-full py-2 px-4 border-4 rounded-2xl hover:bg-green-300"
@@ -91,18 +140,29 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
                 >
                   {option}
                 </button>
-              ))}
+              )) || <p>No options available</p>}
+              <div className="hidden">
+                {showAnswer && (
+                  <p className="text-center mt-4">
+                    {selectedOption === currentQuestion?.correctAnswer
+                      ? "Correct!"
+                      : "Incorrect, try again."}
+                  </p>
+                )}
+              </div>
             </div>
-            {showAnswer && (
-              <p className="text-center mt-4">
-                {selectedOption === currentQuestion.correctAnswer
-                  ? "Correct!"
-                  : "Incorrect, try again."}
-              </p>
-            )}
+            <p className={`text-center text-lg mt-6`} style={{ backgroundColor: file.bgColor }}>
+              <span className="font-bold">{timeRemaining}s</span>
+            </p>
           </div>
         </div>
       </div>
+      <ScoreModal
+        score={score}
+        totalQuestions={file.questions.length}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 };
