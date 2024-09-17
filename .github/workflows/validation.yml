@@ -45,4 +45,5 @@ jobs:
             - name: Run Lint
               run: pnpm lint
             - name: Run Build
-              run: pnpm build
+              working-directory: ./components
+              run: npm run build
