@@ -58,10 +58,10 @@ export const MainLandingPage = ({ session }: { session: SessionData }) => {
             <div className="flex justify-center items-center">
               <Link
                 className="text-2xl w-1/2 rounded-full font-semibold flex items-center gap-2 justify-center leading-8 text-[#163a59] border-4 border-[#163a59] bg-white px-4 py-2 my-12 shadow-2xl hover:shadow-xl transition-shadow duration-300 ease-in-out"
-                href={session?.data ? "/onboarding" : "/home"}
+                href={session  ? "/onboarding" : "/home"}
                 onClick={handleAuth}
               >
-                {session?.data ? (
+                {session ? (
                   <span className="flex items-center gap-2">
                     {/* <UserIcon className="w-6 h-6" /> */}
                     Go to your profile
