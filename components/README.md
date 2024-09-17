@@ -33,5 +33,4 @@ function App() {
 
 ## Components
 
- - [x] Example Component - v0.0.0
-
+- [x] Example Component - v0.0.0
