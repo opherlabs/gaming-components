@@ -1,8 +1,8 @@
 
-export const example = () => {
+export const Example = () => {
   return (
     <div>
-      Example     
+      Example Component    
     </div>
   )
 }
