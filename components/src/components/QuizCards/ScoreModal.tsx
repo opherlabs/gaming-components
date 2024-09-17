@@ -24,7 +24,7 @@ const ScoreModal: React.FC<ScoreModalProps> = ({ score, totalQuestions, isOpen, 
         <h2 className="text-xl font-bold text-center mb-4">Quiz Completed</h2>
         <p className="text-center mb-4">Your Score: {score}/{totalQuestions}</p>
         <button
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+          className="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
           onClick={() => window.location.href = '/cards'}
         >
           Go to Cards
