@@ -1,6 +1,7 @@
 "use client";
 import { useParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { FaTimes } from "react-icons/fa"; // Importing the XMark icon from react-icons
 
 type Question = {
   question: string;
@@ -47,7 +48,7 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
       setTimeout(() => {
         setShowAnswer(false);
         setSelectedOption(null);
-        router.push("/cards");
+        router.push('/cards');
       }, 1000);
     }
   };
@@ -55,15 +56,20 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
   return (
     <div className="mx-auto h-screen p-10 my-5 lg:px-8">
       <div
-        className="bg-cover bg-center rounded-lg h-full"
+        className="bg-cover bg-center rounded-lg h-full relative"
         style={{ backgroundImage: `url(${file.source})` }}
       >
+        {/* XMark Icon */}
+        <button
+          className="absolute top-4 left-4 text-white text-3xl"
+          onClick={() => router.push("/cards")}
+        >
+          <FaTimes />
+        </button>
+
         <div className="flex items-center justify-center h-full w-full">
           <div className="relative rounded-lg shadow-lg max-w-md w-full">
-            <div
-              className="bg-cover bg-center rounded-t-lg p-6"
-              style={{ backgroundColor: file.bgColor }}
-            >
+            <div className="bg-cover bg-center rounded-t-lg p-6" style={{ backgroundColor: file.bgColor }}>
               <h2 className="text-2xl font-bold text-center text-white mb-2">
                 {file.title} Questions
               </h2>
@@ -77,11 +83,9 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
                   key={index}
                   className="w-full py-2 px-4 border-4 rounded-2xl hover:bg-green-300"
                   style={{
-                    borderColor:
-                      selectedOption === option ? "green" : file.bgColor,
-                    backgroundColor:
-                      selectedOption === option ? "green" : "transparent",
-                    color: selectedOption === option ? "white" : "black",
+                    borderColor: selectedOption === option ? 'green' : file.bgColor,
+                    backgroundColor: selectedOption === option ? 'green' : 'transparent',
+                    color: selectedOption === option ? 'white' : 'black'
                   }}
                   onClick={() => handleAnswerCheck(option)}
                 >
@@ -89,15 +93,13 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
                 </button>
               ))}
             </div>
-            <div className="hidden">
-              {showAnswer && (
-                <p className="text-center mt-4">
-                  {selectedOption === currentQuestion.correctAnswer
-                    ? "Correct!"
-                    : "Incorrect, try again."}
-                </p>
-              )}
-            </div>
+            {showAnswer && (
+              <p className="text-center mt-4">
+                {selectedOption === currentQuestion.correctAnswer
+                  ? "Correct!"
+                  : "Incorrect, try again."}
+              </p>
+            )}
           </div>
         </div>
       </div>
