@@ -1,1 +1,2 @@
-export {Example} from './Example'
+export * from './example';
+export * from './QuizCards';
