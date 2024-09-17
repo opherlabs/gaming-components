@@ -17,7 +17,6 @@ export default function Home() {
         <ExampleComponent key={i} bg={bg} title={title} />
       ))
      }
-     {/* <ExampleComponent bg="#243975" title="DIVERSITY QUESTIONS" /> */}
     </div>
   );
 }
