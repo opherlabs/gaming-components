@@ -2,7 +2,7 @@
 export const ExampleComponent = () => {
   return (
     <div>
-      Example Component   for testing 
+      Example Component   for testing only
     </div>
   )
 }
