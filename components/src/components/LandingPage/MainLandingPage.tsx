@@ -5,14 +5,6 @@ import { ImageGallery, LandingPageImages, smallImages } from ".";
 import { SmallRoundedImageGallery } from "./SmallRoundedImageGallery ";
 import React from "react";
 
-interface SessionData {
-    data?: {
-      name?: string;
-      email?: string;
-    };
-    
-  }
-
 export const MainLandingPage = ({ session }: { session: unknown| null | undefined }) => {
  
 
