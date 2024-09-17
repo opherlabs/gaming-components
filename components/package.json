@@ -35,7 +35,7 @@
     "build": "rollup -c --bundleConfigAsCjs",
     "start": "next start",
     "lint": "next lint",
-    "pub": "pnpm publish --access public",
+    "pub": "pnpm publish --access public --publish-branch publish",
     "release": "standard-version --sign --tag-prefix 'itthynk-components@' ",
     "rel:minor": "pnpm release  --release-as minor",
     "rel:patch": "pnpm release  --release-as patch",
