@@ -7,12 +7,7 @@ import Link from "next/link";
 import { ImageGallery, LandingPageImages, smallImages } from ".";
 import { SmallRoundedImageGallery } from "./SmallRoundedImageGallery ";
 
-const navigation = [
-  { name: "Onboarding", href: "/onboarding" },
-  { name: "Say Thanks", href: "/saththanks" },
-  { name: "Nominate", href: "/nominate" },
-  { name: "Celebrate", href: "/celebrate" },
-];
+
 
 export const MainLandingPage = ({ session }: { session: any }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -62,7 +57,7 @@ export const MainLandingPage = ({ session }: { session: any }) => {
             }}
           />
         </div>
-        <div className="mx-auto max-w-4xl py-32 sm:py-48 lg:py-72">
+        <div className="mx-auto max-w-7xl py-32 sm:py-48 lg:py-72">
           <div className="text-center text-white space-y-6 px-4">
             <div className="flex  justify-center items-center gap-3 ">
                 <div className="flex-1" >  <ImageGallery images={LandingPageImages} /></div>

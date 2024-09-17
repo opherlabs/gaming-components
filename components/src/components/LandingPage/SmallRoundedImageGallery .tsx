@@ -1,6 +1,8 @@
 import Image from 'next/image';
+import { ImageGalleryProps } from './landingPageDto';
 
-export const SmallRoundedImageGallery = ({ images }: any) => {
+
+export const SmallRoundedImageGallery = ({ images }: ImageGalleryProps) => {
   return (
     <div className="flex justify-center items-center gap-4">
       {images.map((img:any, index:any) => (

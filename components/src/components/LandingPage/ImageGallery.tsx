@@ -1,11 +1,13 @@
 import Image from 'next/image';
+import { ImageGalleryProps, ImageProps } from './landingPageDto';
 
-export const ImageGallery = ({ images }: any) => {
+
+export const ImageGallery = ({ images }: ImageGalleryProps) => {
   return (
     <div>
  <div className="bg-white rounded-full h-[7rem] flex justify-evenly items-center text-black shadow-2xl hover:shadow-xl transition-shadow duration-300 ease-in-out ">
       
-      {images?.map((img: any, index: any) => (
+      {images?.map((img: ImageProps, index: Number|any) => (
         <div key={index}>
           <Image
             height={img.height}
