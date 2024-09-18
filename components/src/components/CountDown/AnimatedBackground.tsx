@@ -41,7 +41,6 @@ export const AnimatedBackground: React.FC = () => {
       animationFrameId = requestAnimationFrame(render);
     };
     render();
-
     return () => cancelAnimationFrame(animationFrameId);
   }, [dimensions]);
   return (
