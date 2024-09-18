@@ -12,7 +12,6 @@ const AnimatedPage = () => {
                 </div>
             </div>
         </AnimatedCard>
-        
     </div>
   )
 }
