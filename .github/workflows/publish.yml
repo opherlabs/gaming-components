@@ -68,6 +68,7 @@ jobs:
               with:
                 node-version: '20'
                 registry-url: 'https://registry.npmjs.org'
+                scope: '@opherlabs'
       
             - name: Setup pnpm
               uses: pnpm/action-setup@v4.0.0
