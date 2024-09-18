@@ -95,7 +95,12 @@ jobs:
       
             - name: Build
               working-directory: ./components
-              run: npm run build
+              run: |
+                // replace the version in package.json with the release version
+                const packageJson = require('./package.json');
+                packageJson.version = ${{ needs.release-version.outputs.release_version }};
+                fs.writeFileSync('./package.json', JSON.stringify(packageJson, null, 2));
+                npm run build
       
             - name: Publish to npm
               working-directory: ./components
@@ -143,7 +148,12 @@ jobs:
       
             - name: Build
               working-directory: ./components
-              run: npm run build
+              run: |
+                // replace the version in package.json with the release version
+                const packageJson = require('./package.json');
+                packageJson.version = ${{ needs.release-version.outputs.release_version }};
+                fs.writeFileSync('./package.json', JSON.stringify(packageJson, null, 2));
+                npm run build
             - name: Publish to GitHub Packages
               working-directory: ./components
               run: npm publish --no-git-checks --registry https://npm.pkg.github.com
