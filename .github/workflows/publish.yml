@@ -38,7 +38,7 @@ jobs:
       - uses: actions/checkout@v4.1.7
       - name: setup node
         id: release_trigger
-        uses: mitch1009/release-trigger@v1.1.4
+        uses: mitch1009/release-trigger@v1.1.5
         with:
           git_user_email: ${{env.GIT_USER_EMAIL}} 
           git_username: ${{env.GIT_USERNAME }}   
@@ -46,6 +46,7 @@ jobs:
           gpg_passphrase: ${{env.GLOBAL_GPG_PASSPHRASE}}
           git_token: ${{env.GIT_TOKEN}}
           bump_script: "comp rel:patch"
+          working_directory: "components"
           release_branch: publish
           version_file_path: "components/package.json"
       - name: Release Trigger
@@ -148,11 +149,42 @@ jobs:
               run: npm publish --no-git-checks --registry https://npm.pkg.github.com
               env:
                 NODE_AUTH_TOKEN: ${{ secrets.GIT_TOKEN }}
+  tag-release:
+    name: Tag Release 🎉
+    runs-on: ubuntu-latest
+    environment: publish
+    needs: [release-version,publish-github]
+    if: needs.release-version.outputs.release_version != ''
+    permissions:
+      contents: write
+      id-token: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.7
+        with:
+          fetch-depth: 0 
+      - name: Generate Release Notes
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { data: releases } = await github.rest.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            const release = releases.find(release => release.tag_name === process.env.RELEASE_VERSION);
+            if (!release) {
+              core.setFailed(`No release found for version: ${process.env.RELEASE_VERSION}`);
+              return;
+            }
+            core.setOutput('release-notes', release.body);
+     
   create-new-release:
     name: Create New Release 🎉
     runs-on: ubuntu-latest
     environment: publish
-    needs: [release-version,publish-npm]
+    needs: [release-version,publish-npm, tag-release]
     if: needs.release-version.outputs.release_version != ''
     permissions:
       contents: write
