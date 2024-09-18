@@ -5,7 +5,7 @@ import babel from '@rollup/plugin-babel';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { terser } from 'rollup-plugin-terser';
 
-export default {
+const config= {
   input: 'src/components/index.ts',
   output: [
     {
@@ -34,3 +34,4 @@ export default {
   ],
   external: ['react', 'react-dom']
 };
+export default config;
