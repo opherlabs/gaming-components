@@ -7,13 +7,16 @@ type FileItem = {
   title: string;
   source: string;
   bgColor: string;
+  [key: string]: any;
 };
 
 interface TestingCOProps {
   files: FileItem[];
+  url: string;
+
 }
 
-export const QuizCards: React.FC<TestingCOProps> = ({ files }) => {
+export const QuizCards: React.FC<TestingCOProps> = ({ files,url }) => {
   return (
     <div className="p-16">
       <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
@@ -22,7 +25,7 @@ export const QuizCards: React.FC<TestingCOProps> = ({ files }) => {
             key={file.id}
             className="relative group transition-transform transform hover:scale-105"
           >
-            <Link href={`/cards/${file.id}`}>
+            <Link href={`/${url}/${file.id}`}>
               <div
                 className="aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-t-lg bg-gray-100 relative"
                 style={{ height: "200px" }}
