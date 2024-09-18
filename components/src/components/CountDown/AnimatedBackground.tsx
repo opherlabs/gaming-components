@@ -54,7 +54,7 @@ export const AnimatedBackground: React.FC = () => {
       {canvasRef.current && Array.from({ length: 100 }).map((_, index) => (
         <ParticleComponent
           key={index}
-          context={canvasRef.current?.getContext('2d')?? null}
+          context={canvasRef.current?.getContext('2d') ?? null}
           width={dimensions.width}
           height={dimensions.height}
         />
