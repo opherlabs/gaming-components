@@ -6,7 +6,6 @@ export default function Home() {
   return (
     <div className="">
       <MainLandingPage session={null} />
-      <QuizCards files={files}       />
     </div>
 
   );
