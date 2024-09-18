@@ -45,7 +45,7 @@ jobs:
           gpg_private_key: ${{env.GLOBAL_GPG_SECRET}}  
           gpg_passphrase: ${{env.GLOBAL_GPG_PASSPHRASE}}
           git_token: ${{env.GIT_TOKEN}}
-          bump_script: "comp rel:patch"
+          bump_script: "rel:patch"
           working_directory: "components"
           release_branch: publish
           version_file_path: "components/package.json"
