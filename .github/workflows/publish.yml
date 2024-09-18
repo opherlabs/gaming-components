@@ -153,8 +153,7 @@ jobs:
     name: Tag Release 🎉
     runs-on: ubuntu-latest
     environment: publish
-    needs: [release-version,publish-github]
-    if: needs.release-version.outputs.release_version != ''
+    needs: [publish-github]
     permissions:
       contents: write
       id-token: write
@@ -166,19 +165,8 @@ jobs:
         with:
           fetch-depth: 0 
       - name: Generate Release Notes
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const { data: releases } = await github.rest.repos.listReleases({
-              owner: context.repo.owner,
-              repo: context.repo.repo
-            });
-            const release = releases.find(release => release.tag_name === process.env.RELEASE_VERSION);
-            if (!release) {
-              core.setFailed(`No release found for version: ${process.env.RELEASE_VERSION}`);
-              return;
-            }
-            core.setOutput('release-notes', release.body);
+        run: |
+          echo "RELEASE_VERSION=$(cat components/package.json | jq -r .version)"
      
   create-new-release:
     name: Create New Release 🎉
