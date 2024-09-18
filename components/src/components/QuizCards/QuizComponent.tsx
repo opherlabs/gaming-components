@@ -97,7 +97,7 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
     <div className="mx-auto h-screen p-10 my-5 lg:px-8">
       <div
         className="bg-cover bg-center rounded-lg h-full relative"
-        style={{ backgroundImage: `url(${file.source})` }}
+        style={{ backgroundImage: `url(${file.source.replace("-sm", "")})` }}
       >
         <button
           className="absolute top-4 right-4 bg-red-600 p-2 rounded-full text-white text-3xl"
