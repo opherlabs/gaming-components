@@ -96,7 +96,7 @@ jobs:
             - name: Build
               working-directory: ./components
               run: |
-                // replace the version in package.json with the release version
+                # replace the version in package.json with the release version
                 const packageJson = require('./package.json');
                 packageJson.version = ${{ needs.release-version.outputs.release_version }};
                 fs.writeFileSync('./package.json', JSON.stringify(packageJson, null, 2));
@@ -149,7 +149,7 @@ jobs:
             - name: Build
               working-directory: ./components
               run: |
-                // replace the version in package.json with the release version
+                # replace the version in package.json with the release version
                 const packageJson = require('./package.json');
                 packageJson.version = ${{ needs.release-version.outputs.release_version }};
                 fs.writeFileSync('./package.json', JSON.stringify(packageJson, null, 2));
