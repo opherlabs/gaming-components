@@ -1,12 +1,12 @@
 import React from "react";
-import { MainLandingPage,files, CompanyValuesComponent,QuizComponent } from '../components/'
+import { MainLandingPage, QuizCards } from '../components/'
+import { files } from "@/components/QuizCards";
 
 export default function Home() {
   return (
     <div className="">
       <MainLandingPage session={null} />
-      <CompanyValuesComponent />
-      <QuizComponent files={files} />
+      <QuizCards files={files}       />
     </div>
 
   );

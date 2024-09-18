@@ -8,7 +8,7 @@ interface ScoreModalProps {
   onClose: () => void;
 }
 
-const ScoreModal: React.FC<ScoreModalProps> = ({
+export const ScoreModal: React.FC<ScoreModalProps> = ({
   score,
   totalQuestions,
   isOpen,

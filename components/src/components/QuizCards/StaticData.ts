@@ -2,7 +2,7 @@ export const files = [
     {
       id: "1",
       title: "DIVERSITY QUESTIONS",
-      source: "/cards/blue.jpeg",
+      source: "/cards/sun-sm.svg",
       bgColor: "#1A3E75",
       questions: [
         {
@@ -22,7 +22,7 @@ export const files = [
     {
       id: "2",
       title: "STORYTELLING PROMPTS",
-      source: "/cards/pink.jpeg",
+      source: "/cards/blue-sm.svg",
       bgColor: "#B32891",
       questions: [
         {
@@ -42,7 +42,7 @@ export const files = [
     {
       id: "3",
       title: "CHALLENGING CARDS",
-      source: "/cards/light.webp",
+      source: "/cards/sun-sm.svg",
       bgColor: "#00C8DA",
       questions: [
         {
@@ -62,7 +62,7 @@ export const files = [
     {
       id: "4",
       title: "UNITY CARDS",
-      source: "/cards/green.jpeg",
+      source: "/cards/green-sm.svg",
       bgColor: "#00BEA1",
       questions: [
         {
