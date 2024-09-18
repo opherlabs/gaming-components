@@ -3,7 +3,7 @@ import React, { useState, useEffect, FC } from 'react';
 import { Clock, Users, Rocket } from 'lucide-react';
 import { AnimatedBackground } from './AnimatedBackground';
 export const CountdownComponent: FC<{ targetDate: string  }> = ({ targetDate }) => {
-  const [timeLeft, setTimeLeft] = useState<any>(calculateTimeLeft());
+  const [timeLeft, setTimeLeft] = useState<{ [key: string]: number | undefined }>(calculateTimeLeft());
 
   function calculateTimeLeft() {
     const difference = +new Date(targetDate) - +new Date();
@@ -29,7 +29,14 @@ export const CountdownComponent: FC<{ targetDate: string  }> = ({ targetDate }) 
     return () => clearTimeout(timer);
   });
 
-  const timeComponents = Object.keys(timeLeft).map((interval) => {
+  interface TimeLeft {
+    days?: number;
+    hours?: number;
+    minutes?: number;
+    seconds?: number;
+  }
+
+  const timeComponents = Object.keys(timeLeft as TimeLeft).map((interval) => {
     if (!timeLeft[interval]) {
       return null;
     }
