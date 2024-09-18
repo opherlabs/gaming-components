@@ -39,11 +39,7 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    if (timeLeft === 0) {
-      moveToNextQuestion();
-      return;
-    }
-
+    
     timerRef.current = setInterval(() => {
       setTimeLeft((prevTime) => prevTime - 1);
     }, 1000);
@@ -74,6 +70,12 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
     }
     if (timerRef.current) clearInterval(timerRef.current);
   };
+
+  if (timeLeft === 0) {
+    moveToNextQuestion();
+    return;
+  }
+
 
   const handleAnswerCheck = (option: string) => {
     setSelectedOption(option);
