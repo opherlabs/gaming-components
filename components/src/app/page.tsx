@@ -1,5 +1,5 @@
 import React from "react";
-import { MainLandingPage, QuizCards } from '../components/'
+import { AnimatedCard, MainLandingPage, QuizCards } from '../components/'
 import { files } from "@/components/QuizCards";
 
 export default function Home() {
