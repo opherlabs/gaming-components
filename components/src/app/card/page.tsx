@@ -11,6 +11,7 @@ const AnimatedPage = () => {
                     <span className="text-4xl sm:text-2xl">The event has started!</span>
                 </div>
             </div>
+            
         </AnimatedCard>
     </div>
   )
