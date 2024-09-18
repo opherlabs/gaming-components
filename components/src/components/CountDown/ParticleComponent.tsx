@@ -8,6 +8,7 @@ interface ParticleProps {
   height: number;
 }
 
+
 export const ParticleComponent: React.FC<ParticleProps> = ({ context, width, height }) => {
   const x = useRef(Math.random() * width);
   const y = useRef(Math.random() * height);
