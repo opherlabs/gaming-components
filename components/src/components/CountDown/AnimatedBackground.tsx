@@ -44,7 +44,6 @@ export const AnimatedBackground: React.FC = () => {
 
     return () => cancelAnimationFrame(animationFrameId);
   }, [dimensions]);
-
   return (
     <>
       <canvas
