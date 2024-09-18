@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "comp": "pnpm --filter @itthynk/components "
+    "comp": "pnpm --filter @opherlabs/components "
   },
   "keywords": [],
   "author": "",
