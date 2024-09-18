@@ -1,9 +1,7 @@
-interface PopupModalProps {
-    title: string;
-    question: string;
-}
+
 
 export const CompanyValuesComponent = () => {
+    
     return(
         <div className="max-w-xl bg-white rounded-2xl mt-4">
             <div className="bg-[#0D244F] h-[9rem] text-center py-4 rounded-t-2xl px-4">
