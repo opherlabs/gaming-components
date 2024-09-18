@@ -2,7 +2,8 @@
 import React, { useState, useEffect, FC } from 'react';
 import { Clock, Users, Rocket } from 'lucide-react';
 import { AnimatedBackground } from './AnimatedBackground';
-export const CountdownComponent: FC<{ targetDate: string  }> = ({ targetDate }) => {
+import { RegisterAction } from './RegisterAction';
+export const CountdownComponent: FC<{ targetDate: string,url:string  }> = ({ targetDate,url="/api/auth/register" }) => {
   const [timeLeft, setTimeLeft] = useState<{ [key: string]: number | undefined }>(calculateTimeLeft());
 
   function calculateTimeLeft() {
@@ -80,9 +81,7 @@ export const CountdownComponent: FC<{ targetDate: string  }> = ({ targetDate }) 
       
       <div className="mt-8 text-center">
         <p className="text-lg">Register by 23 September 2024 to secure your spot!</p>
-        <button className="mt-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-          Register Now
-        </button>
+        <RegisterAction url={url} />
       </div>
     </div>
   );
