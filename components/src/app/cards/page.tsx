@@ -17,7 +17,7 @@ function CardsComponent() {
         }}
       >
         <div className="p-4 m-6 rounded-lg shadow-md w-full bg-white">
-          <QuizCards files={files} />
+          <QuizCards url="cards" files={files} />
         </div>
       </div>
     );

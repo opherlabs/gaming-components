@@ -1,6 +1,6 @@
-import { files } from "@/components/QuizCards";
 import {  QuizComponent } from  "../../../components"
 import React from "react";
+import { files } from "../../../components/QuizCards";
 
 function CardsComponent() {
   return (
