@@ -8,7 +8,6 @@ function CardsComponent() {
       <QuizCards url="cards" files={files} />
     </CardsHolder>
 
-
   );
 }
 
