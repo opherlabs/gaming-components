@@ -1,7 +1,11 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { ParticleComponent } from './ParticleComponent';
+import dynamic from 'next/dynamic';
+
+const DynamicParticleComponent = dynamic(() => import('./ParticleComponent'), {
+  ssr: false,
+});
 
 export const AnimatedBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -51,14 +55,7 @@ export const AnimatedBackground: React.FC = () => {
         height={dimensions.height}
         className="fixed inset-0 pointer-events-none"
       />
-      {canvasRef.current && Array.from({ length: 100 }).map((_, index) => (
-        <ParticleComponent
-          key={index}
-          context={canvasRef.current?.getContext('2d') ?? null}
-          width={dimensions.width}
-          height={dimensions.height}
-        />
-      ))}
+      {canvasRef.current && <DynamicParticleComponent count={100} />}
     </>
   );
 };
