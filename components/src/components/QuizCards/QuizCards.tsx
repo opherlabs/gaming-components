@@ -7,7 +7,7 @@ type FileItem = {
   title: string;
   source: string;
   bgColor: string;
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 interface TestingCOProps {
