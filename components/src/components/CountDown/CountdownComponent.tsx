@@ -41,24 +41,29 @@ export const CountdownComponent: React.FC<{ targetDate: string,url:string }> = (
     }
 
     return (
-      <div key={interval} className="flex flex-col items-center p-4 bg-white bg-opacity-20 rounded-lg backdrop-blur-md">
-        <span className="text-4xl font-bold text-white mb-2 sm:text-2xl">{timeLeft[interval]}</span>
-        <span className="text-lg text-white uppercase sm:text-base">{interval}</span>
+      <div key={interval} className="flex px-3 flex-col items-center p-4 bg-white bg-opacity-20 rounded-lg backdrop-blur-md">
+        <span className="text-3xl font-bold text-white mb-2 sm:text-2xl 2xl:text-5xl">{timeLeft[interval]}</span>
+        <span className="text-sm text-white uppercase sm:text-base 2xl:text-lg">{interval}</span>
       </div>
     );
   });
 
   return (
-    <div className="relative min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-900 via-purple-800 to-pink-700 text-white overflow-hidden">
+    <div className="relative px-4 min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-900 via-purple-800 to-pink-700 text-white overflow-hidden">
       <AnimatedBackground />
-      <div className="z-10 text-center mb-8">
-        <h1 className="text-4xl font-bold mb-4 sm:text-2xl">Unity in Diversity: A Cultural Celebration Game</h1>
+      <div className="z-10 text-center px-4 mx-3 mb-8">
+        <h1 className="text-3xl font-bold mb-4 sm:text-3xl pt-4 sm:pt-0  2xl:text-5xl">Unity in Diversity: A Cultural Celebration Game</h1>
         <p className="text-xl mb-4 sm:text-lg">Countdown to Heritage Day Celebration</p>
         <div className="flex space-x-4 justify-center sm:space-x-2">
-          {isClient ? (timeComponents.length ? timeComponents : <span className="text-4xl sm:text-2xl">The event has started!</span>) : <span className="text-4xl sm:text-2xl">Loading...</span>}
+          {isClient ? (timeComponents.length ? timeComponents : <span className="text-xl sm:text-2xl 2xl:text-5xl">The Game has started!</span>) : <span className="text-4xl sm:text-2xl 2xl:text-5xl">Loading...</span>}
         </div>
       </div>
-      
+      <div className="z-10 mt-3 text-center">
+        <p className="text-lg sm:text-base">Register by 23 September 2024 to secure your spot!</p>
+        <div className="py-3 my-4">
+        <RegisterAction url={url} />
+        </div>
+      </div>
       <div className="z-10 bg-white bg-opacity-10 p-6 rounded-lg backdrop-blur-md max-w-2xl sm:max-w-2xl sm:p-4">
         <h2 className="text-2xl font-bold mb-4 sm:text-xl">How to Play the Game</h2>
         <ul className="space-y-4 sm:space-y-2">
@@ -77,12 +82,7 @@ export const CountdownComponent: React.FC<{ targetDate: string,url:string }> = (
         </ul>
       </div>
       
-      <div className="z-10 mt-8 text-center">
-        <p className="text-lg sm:text-base">Register by 23 September 2024 to secure your spot!</p>
-        <div className="py-3">
-        <RegisterAction url={url} />
-        </div>
-      </div>
+      
     </div>
   );
 };
