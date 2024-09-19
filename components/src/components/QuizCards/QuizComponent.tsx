@@ -102,7 +102,7 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files, url }) => {
       >
         <button
           className="absolute top-4 right-4 bg-red-600 p-2 rounded-full text-white text-3xl"
-          onClick={() => router.push("/cards")}
+          onClick={() => router.push(`/${url}`)}
         >
           <FaTimes />
         </button>
