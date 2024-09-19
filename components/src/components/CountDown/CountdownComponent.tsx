@@ -5,7 +5,7 @@ import { AnimatedBackground } from './AnimatedBackground';
 import { Clock, Users, Rocket } from 'lucide-react';
 import { RegisterAction } from './RegisterAction';
 
-export const CountdownComponent: React.FC<{ targetDate: string }> = ({ targetDate }) => {
+export const CountdownComponent: React.FC<{ targetDate: string,url:string }> = ({ targetDate,url='/api/auth/signup' }) => {
   const [timeLeft, setTimeLeft] = useState<{ [key: string]: number }>({});
   const [isClient, setIsClient] = useState(false);
 
@@ -80,7 +80,7 @@ export const CountdownComponent: React.FC<{ targetDate: string }> = ({ targetDat
       <div className="z-10 mt-8 text-center">
         <p className="text-lg sm:text-base">Register by 23 September 2024 to secure your spot!</p>
         <div className="py-3">
-        <RegisterAction url={'/api/auth/register'} />
+        <RegisterAction url={url} />
         </div>
       </div>
     </div>
