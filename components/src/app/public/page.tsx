@@ -3,7 +3,7 @@
 import { IUserSession } from "@/lib/types/UserSession"
 import { useSearchParams } from "next/navigation"
 
-const page = () => {
+const PublicPage = () => {
   const mode = useSearchParams().get('mode')
   const session: IUserSession = {
     user: {
@@ -27,4 +27,4 @@ const page = () => {
   )
 }
 
-export default page
+export default PublicPage
