@@ -22,9 +22,10 @@ type FileItem = {
 
 interface FileDetailProps {
   files: FileItem[];
+  url: string;
 }
 
-export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
+export const QuizComponent: React.FC<FileDetailProps> = ({ files, url }) => {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
   const file = files.find((item) => item.id === id);
@@ -90,7 +91,7 @@ export const QuizComponent: React.FC<FileDetailProps> = ({ files }) => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    router.push("/cards");
+    router.push(`/${url}`);
   };
 
   return (

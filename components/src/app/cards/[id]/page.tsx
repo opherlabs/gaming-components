@@ -9,7 +9,7 @@ function CardsComponent() {
       style={{ backgroundImage: 'url("/cards/flag.svg")' }}
     >
       <div className="rounded-lg w-full">
-        <QuizComponent files={files} />
+        <QuizComponent url="cards" files={files} />
       </div>
     </div>
   );
