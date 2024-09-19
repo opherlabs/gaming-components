@@ -15,7 +15,7 @@ export const CardsHolder = ({ children }: { children: React.ReactNode }) => {
                     justifyContent: 'center'
                 }}
             >
-                <div className="p-4 m-6 rounded-lg shadow-md w-full bg-white">
+                <div className=" p-4 m-6  rounded-lg shadow-md w-full bg-white">
                     {children}
                 </div>
             </div>
