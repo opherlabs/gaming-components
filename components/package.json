@@ -1,6 +1,7 @@
 {
   "name": "@opherlabs/components",
   "version": "1.2.0-0",
+
   "private": false,
   "license": "MIT",
   "description": "A collection of reusable NextJs Optimized components for building scalable user interfaces.",
