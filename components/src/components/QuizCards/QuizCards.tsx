@@ -65,13 +65,13 @@ export const QuizCards: React.FC<TestingCOProps> = ({ files, url }) => {
             <Link href={`/${url}/${file.id}`}>
               {/* Mobile View */}
               <motion.div
-                className="block sm:hidden w-full h-48 bg-cover bg-center relative rounded-t-lg"
+                className="block sm:hidden w-full h-60 bg-cover bg-center relative rounded-2xl"
                 style={{ backgroundImage: `url(${file.source})` }}
                 initial={{ opacity: 0, y: 20, rotateX: -90 }}
                 animate={{ opacity: 1, y: 0, rotateX: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
               >
-                <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black bg-opacity-60 rounded-2xl flex items-center justify-center">
                   <div className="text-center text-white px-4">
                     {file.title.split(" ").map((word, index) => (
                       <p key={index} className="text-lg font-bold">
