@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import ScoreModal from "./ScoreModal";
 import { PiHourglassFill } from "react-icons/pi";
 
-// Type definitions
 type Question = {
   question: string;
   options: string[];
