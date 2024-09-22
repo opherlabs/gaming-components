@@ -51,10 +51,10 @@ export const QuizCards: React.FC<TestingCOProps> = ({ files, url }) => {
                 },
               },
               hover: {
-                scale: 1.05, // Scale up on hover
-                opacity: 0.9, // Slightly fade
-                x: [0, 10, -10, 10, -10, 0], // Shake effect
-                rotateZ: [0, 2, -2, 2, -2, 0], // Slight rotation for extra effect
+                scale: 1.05,
+                opacity: 0.9,
+                x: [0, 10, -10, 10, -10, 0], 
+                rotateZ: [0, 2, -2, 2, -2, 0], 
                 transition: {
                   duration: 0.5,
                   ease: "easeInOut",
