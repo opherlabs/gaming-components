@@ -44,19 +44,19 @@ export const QuizCards: React.FC<TestingCOProps> = ({ files, url }) => {
             variants={{
               rest: {
                 scale: 1,
-                rotateX: 0,
-                rotateY: 0,
+                opacity: 1,
                 transition: {
-                  duration: 0.6,
+                  duration: 0.3,
                   ease: "easeInOut",
                 },
               },
               hover: {
-                rotateY: [0, 180, 0],
-                rotateX: [0, -180, 0], 
-                scale: 1.1,
+                scale: 1.05, // Scale up on hover
+                opacity: 0.9, // Slightly fade
+                x: [0, 10, -10, 10, -10, 0], // Shake effect
+                rotateZ: [0, 2, -2, 2, -2, 0], // Slight rotation for extra effect
                 transition: {
-                  duration: 1.2,
+                  duration: 0.5,
                   ease: "easeInOut",
                 },
               },
