@@ -23,7 +23,7 @@ export const files = [
       id: "2",
       title: "STORYTELLING PROMPTS",
       source: "/cards/blue-sm.svg",
-      bgColor: "#B32891",
+      bgColor: "#212E60",
       questions: [
         {
           question: "Who was the first democratic president of South Africa?",
